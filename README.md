@@ -21,7 +21,7 @@ accurate and easy-to-use conversions in their applications.
 First, import the `convert` function from the library:
 
 ```typescript
-import { convert } from "unit-converter";
+import { convert } from "@sebastian/measurements";
 ```
 
 ### Examples
