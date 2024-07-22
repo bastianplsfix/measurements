@@ -1,3 +1,8 @@
+/**
+ * A Map containing vulgar fractions as keys and their corresponding decimal representations as values.
+ * Each value is an array of decimal approximations with increasing precision.
+ * @type {Map<string, number[]>}
+ */
 const VULGAR_MAP = new Map([
   ['¼', [0.25]],
   ['½', [0.5]],
@@ -139,20 +144,83 @@ const VULGAR_MAP = new Map([
   ['⅞', [0.875]],
 ]);
 
+/**
+ * Regular expression to match vulgar fraction characters.
+ * @type {RegExp}
+ */
+
 const vulgarToDecimalRegex = /[¼½¾⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞]/g;
 
+/**
+ * Converts a vulgar fraction character to its decimal representation.
+ * @param {string} match - The vulgar fraction character to convert.
+ * @returns {string} The decimal representation of the vulgar fraction.
+ */
 function toDecimal(match) {
   const values = VULGAR_MAP.get(match)
   return values[0].toString()
 }
 
+/**
+ * Converts all vulgar fractions in a text to their decimal representations.
+ * @param {string} text - The input text containing vulgar fractions.
+ * @returns {string} The text with vulgar fractions replaced by their decimal representations.
+ */
 function convertVulgarToDecimal(text) {
   return text.replace(vulgarToDecimalRegex, toDecimal)
 }
 
-const text = "Mix ¼ cup of sugar with ½ cup of flour and ⅓ cup of milk.";
-const result = convertVulgarToDecimal(text);
-console.log(result);
-// Output: "Mix 0.25 cup of sugar with 0.5 cup of flour and 0.3333333333333333 cup of milk."
 
+/**
+ * Converts a fraction represented by numerator and denominator to its decimal value.
+ * @param {string|number} numerator - The numerator of the fraction.
+ * @param {string|number} denominator - The denominator of the fraction.
+ * @returns {number} The decimal value of the fraction.
+ */
+function getFractionValue(numerator, denominator) {
+  return Number(numerator) / Number(denominator);
+}
 
+/**
+ * Finds the vulgar fraction character for a given decimal fraction value.
+ * @param {number} fraction - The decimal fraction to find a vulgar character for.
+ * @returns {string|null} The vulgar fraction character if found, null otherwise.
+ */
+function findVulgarFraction(fraction) {
+  for (const [vulgar, values] of VULGAR_MAP) {
+    if (values.includes(fraction)) {
+      return vulgar;
+    }
+  }
+  return null;
+}
+
+/**
+ * Replaces a fraction string with its vulgar fraction character if available.
+ * @param {string} match - The full matched fraction string.
+ * @param {string} numerator - The numerator of the fraction.
+ * @param {string} denominator - The denominator of the fraction.
+ * @returns {string} The vulgar fraction character if available, otherwise the original match.
+ */
+function replaceFraction(match, numerator, denominator) {
+  const fraction = getFractionValue(numerator, denominator);
+  const vulgar = findVulgarFraction(fraction);
+  return vulgar || match;
+}
+
+/**
+ * Parses a text and replaces fraction strings with their vulgar fraction characters.
+ * @param {string} text - The input text containing fractions to be parsed.
+ * @returns {string} The text with fractions replaced by vulgar fraction characters where possible.
+ */
+function parseVulgars(text) {
+  const fractionRegex = /(\d+)\s*\/\s*(\d+)/g;
+  return text.replace(fractionRegex, replaceFraction);
+}
+
+// Test the function
+console.log(parseVulgars('1/2 cup'));
+// Output: '½ cup'
+
+console.log(parseVulgars('It takes 1/2 cup chocolate chips and 1/4 cup sugar. Additionally it takes 4 3/4 cups flour.'));
+// Output: 'It takes ½ cup chocolate chips and ¼ cup sugar. Additionally it takes 4 ¾ cups flour.'
