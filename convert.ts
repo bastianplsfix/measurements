@@ -224,3 +224,86 @@ console.log(parseVulgars('1/2 cup'));
 
 console.log(parseVulgars('It takes 1/2 cup chocolate chips and 1/4 cup sugar. Additionally it takes 4 3/4 cups flour.'));
 // Output: 'It takes ½ cup chocolate chips and ¼ cup sugar. Additionally it takes 4 ¾ cups flour.'
+
+/**
+ * Converts a fraction string to its decimal representation.
+ *
+ * @param {string} fraction - The fraction string to convert (e.g., "1/2", "3/4").
+ * @returns {number} The decimal representation of the fraction.
+ * @throws {Error} If the input is not a valid fraction string.
+ */
+function convertFractionToDecimal(fraction) {
+  // Regular expression to match fraction strings
+  const fractionRegex = /^(\d+)\s*\/\s*(\d+)$/;
+
+  // Test if the input matches the fraction pattern
+  const match = fraction.match(fractionRegex);
+
+  if (!match) {
+    throw new Error(`Invalid fraction format: ${fraction}`);
+  }
+
+  const [, numerator, denominator] = match;
+
+  // Convert numerator and denominator to numbers
+  const num = Number(numerator);
+  const den = Number(denominator);
+
+  if (den === 0) {
+    throw new Error("Denominator cannot be zero");
+  }
+
+  // Perform the division and return the result
+  return num / den;
+}
+
+// Example usage:
+try {
+  console.log(convertFractionToDecimal("1/2")); // Output: 0.5
+  console.log(convertFractionToDecimal("3/4")); // Output: 0.75
+  console.log(convertFractionToDecimal("2 / 3")); // Output: 0.6666666666666666
+  console.log(convertFractionToDecimal("5/0")); // Throws an error
+  console.log(convertFractionToDecimal("not a fraction")); // Throws an error
+} catch (error) {
+  console.error(error.message);
+}
+
+/**
+ * Converts a decimal number to its closest vulgar fraction representation.
+ *
+ * @param {number} decimal - The decimal number to convert.
+ * @param {number} [tolerance=1e-6] - The tolerance for considering a match (default is 1e-6).
+ * @returns {string|null} The vulgar fraction character if a close match is found, or null if no match.
+ */
+function convertDecimalToVulgar(decimal, tolerance = 1e-6) {
+  for (const [vulgar, values] of VULGAR_MAP) {
+    for (const value of values) {
+      if (Math.abs(decimal - value) < tolerance) {
+        return vulgar;
+      }
+    }
+  }
+  return null;
+}
+
+/**
+ * Converts a decimal number to a vulgar fraction or its original string representation.
+ *
+ * @param {number} decimal - The decimal number to convert.
+ * @returns {string} The vulgar fraction character if available, or the original number as a string.
+ */
+function convertDecimalToVulgarOrString(decimal) {
+  const vulgar = convertDecimalToVulgar(decimal);
+  return vulgar !== null ? vulgar : decimal.toString();
+}
+
+// Example usage:
+console.log(convertDecimalToVulgar(0.5));  // Output: '½'
+console.log(convertDecimalToVulgar(0.333333333));  // Output: '⅓'
+console.log(convertDecimalToVulgar(0.1428571428571428));  // Output: '⅐'
+console.log(convertDecimalToVulgar(0.7));  // Output: null
+
+console.log(convertDecimalToVulgarOrString(0.25));  // Output: '¼'
+console.log(convertDecimalToVulgarOrString(0.8));  // Output: '⅘'
+console.log(convertDecimalToVulgarOrString(0.7));  // Output: '0.7'
+
