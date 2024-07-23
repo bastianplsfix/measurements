@@ -1,4 +1,4 @@
-import {Unit} from "./types.ts"
+import {Unit} from "./units.ts"
 
 /**
  * Converts a value from one unit of measurement to another.

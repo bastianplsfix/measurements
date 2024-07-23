@@ -26,10 +26,10 @@ export type Unit =
 
 
 type UnitMapping = {
-    [key: string]: string;
+    [Unit: string]: string;
 };
 
-const unitMapping: UnitMapping = {
+export const unitMapping: UnitMapping = {
     'tsp': 'teaspoon | teaspoons',
     'tbsp': 'tablespoon | tablespoons',
     'fl oz': 'fluid ounce | fluid ounces',
@@ -54,5 +54,3 @@ const unitMapping: UnitMapping = {
     'cm': 'centimeter | centimeters',
     'in': 'inch | inches'
 };
-
-
