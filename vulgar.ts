@@ -177,18 +177,23 @@ export const toVulgar = (decimal: number): string => {
 };
 
 
+/**
+ * Converts a vulgar fraction string to its corresponding decimal number as a string.
+ *
+ * @param {string} value - The vulgar fraction string to convert.
+ * @returns {string} The corresponding decimal number as a string, or the original string if no mapping is found.
+ */
 export const toDecimal = (value: string): string => {
-  const mappings = VULGAR_MAP.get(value);
+  const decimalValues = VULGAR_MAP.get(value);
 
-  if (mappings) {
-    // Casting since we know it's always going to be a number.
-    const lastValue = mappings.at(mappings.length - 1) as number;
-
-    return String(lastValue);
+  if (decimalValues) {
+    // Return the last value in the array, which is always the exact decimal representation
+    return String(decimalValues[decimalValues.length - 1]);
   }
 
   return value;
 };
+
 
 /**
  * Converts a fraction string (e.g., "1/2") to a decimal number.
