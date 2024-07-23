@@ -148,7 +148,6 @@ const VULGAR_MAP = new Map([
  * Regular expression to match vulgar fraction characters.
  * @type {RegExp}
  */
-
 const vulgarToDecimalRegex = /[¼½¾⅐⅑⅒⅓⅔⅕⅖⅗⅘⅙⅚⅛⅜⅝⅞]/g;
 
 /**
@@ -258,15 +257,15 @@ function convertFractionToDecimal(fraction) {
 }
 
 // Example usage:
-try {
-  console.log(convertFractionToDecimal("1/2")); // Output: 0.5
-  console.log(convertFractionToDecimal("3/4")); // Output: 0.75
-  console.log(convertFractionToDecimal("2 / 3")); // Output: 0.6666666666666666
-  console.log(convertFractionToDecimal("5/0")); // Throws an error
-  console.log(convertFractionToDecimal("not a fraction")); // Throws an error
-} catch (error) {
-  console.error(error.message);
-}
+//try {
+//  console.log(convertFractionToDecimal("1/2")); // Output: 0.5
+//  console.log(convertFractionToDecimal("3/4")); // Output: 0.75
+//  console.log(convertFractionToDecimal("2 / 3")); // Output: 0.6666666666666666
+//  console.log(convertFractionToDecimal("5/0")); // Throws an error
+//  console.log(convertFractionToDecimal("not a fraction")); // Throws an error
+//} catch (error) {
+//  console.error(error.message);
+//}
 
 /**
  * Converts a decimal number to its closest vulgar fraction representation.
@@ -298,12 +297,12 @@ function convertDecimalToVulgarOrString(decimal) {
 }
 
 // Example usage:
-console.log(convertDecimalToVulgar(0.5));  // Output: '½'
-console.log(convertDecimalToVulgar(0.333333333));  // Output: '⅓'
+//console.log(convertDecimalToVulgar(0.5));  // Output: '½'
+//console.log(convertDecimalToVulgar(0.333333333));  // Output: '⅓'
 console.log(convertDecimalToVulgar(0.1428571428571428));  // Output: '⅐'
-console.log(convertDecimalToVulgar(0.7));  // Output: null
-
-console.log(convertDecimalToVulgarOrString(0.25));  // Output: '¼'
-console.log(convertDecimalToVulgarOrString(0.8));  // Output: '⅘'
-console.log(convertDecimalToVulgarOrString(0.7));  // Output: '0.7'
+//console.log(convertDecimalToVulgar(0.7));  // Output: null
+//
+//console.log(convertDecimalToVulgarOrString(0.25));  // Output: '¼'
+//console.log(convertDecimalToVulgarOrString(0.8));  // Output: '⅘'
+//console.log(convertDecimalToVulgarOrString(0.7));  // Output: '0.7'
 
