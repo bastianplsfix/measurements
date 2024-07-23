@@ -13,6 +13,9 @@ Deno.test("Convert vulgar fraction to decimal", () => {
   assertEquals(toDecimal('⅗'), '0.6');
   assertEquals(toDecimal('⅞'), '0.875');
   assertEquals(toDecimal('⅕'), '0.2');
+  assertEquals(toDecimal('1/2'), '0.5');
+  assertEquals(toDecimal('3/4'), '0.75');
+  assertEquals(toDecimal('2/3'), '0.6666666666666666');
 });
 
 Deno.test("Parse vulgar fractions in text", () => {

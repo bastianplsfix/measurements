@@ -178,9 +178,9 @@ export const toVulgar = (decimal: number): string => {
 
 
 /**
- * Converts a vulgar fraction string to its corresponding decimal number as a string.
+ * Converts a vulgar fraction string or a regular fraction string to its corresponding decimal number as a string.
  *
- * @param {string} value - The vulgar fraction string to convert.
+ * @param {string} value - The vulgar fraction or regular fraction string to convert.
  * @returns {string} The corresponding decimal number as a string, or the original string if no mapping is found.
  */
 export const toDecimal = (value: string): string => {
@@ -189,6 +189,17 @@ export const toDecimal = (value: string): string => {
   if (decimalValues) {
     // Return the last value in the array, which is always the exact decimal representation
     return String(decimalValues[decimalValues.length - 1]);
+  }
+
+  // Check if the value is a regular fraction (e.g., "1/2")
+  const fractionMatch = value.match(/^(\d+)\/(\d+)$/);
+  if (fractionMatch) {
+    const numerator = parseFloat(fractionMatch[1]);
+    const denominator = parseFloat(fractionMatch[2]);
+
+    if (denominator !== 0) {
+      return String(numerator / denominator);
+    }
   }
 
   return value;
