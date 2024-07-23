@@ -129,6 +129,6 @@ Deno.test("Invalid Conversion", () => {
       convert(1, "lb", "m"); // Invalid conversion
     },
     Error,
-    "Invalid or unsupported unit conversion.",
+    "Invalid or unsupported unit conversion from lb to m.",
   );
 });
