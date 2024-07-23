@@ -1,28 +1,4 @@
-// Define a type alias for the supported units of measurement with comments for full names
-type Unit =
-  | "tsp"       // Teaspoon
-  | "tbsp"      // Tablespoon
-  | "fl oz"     // Fluid ounce
-  | "c"         // Cup
-  | "pt"        // Pint
-  | "qt"        // Quart
-  | "gal"       // Gallon
-  | "ml"        // Milliliter
-  | "l"         // Liter
-  | "dl"        // Deciliter
-  | "oz"        // Ounce
-  | "lb"        // Pound
-  | "g"         // Gram
-  | "kg"        // Kilogram
-  | "F"         // Degrees Fahrenheit
-  | "C"         // Degrees Celsius
-  | "pinch"     // Pinch
-  | "dash"      // Dash
-  | "smidgen"   // Smidgen
-  | "m"         // Meter
-  | "ft"        // Foot
-  | "cm"        // Centimeter
-  | "in";       // Inch
+import {Unit} from "./types.ts"
 
 /**
  * Converts a value from one unit of measurement to another.
