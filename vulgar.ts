@@ -234,14 +234,3 @@ export const parseVulgars = (str: string): string => {
     return substr;
   }).join(' ');
 };
-
-console.log(toVulgar(0.25)) // ¼
-console.log(toVulgar(1/9)) // '⅑'
-console.log(toVulgar(.25)) // '¼'
-console.log(toVulgar(0.25)) // '¼'
-console.log(toDecimal('⅛')) // '0.125'
-console.log(toDecimal('⅔')) // '0.666...'
-console.log(parseVulgars('1/2 cup')) // '½ cup'
-console.log(parseVulgars('It take 1/2 cup chocolate chips and 1/4 cup sugar. Additionally it takes 4.75 cups flour.')) // It take ½ cup chocolate chips and ¼ cup sugar. Additionally it takes 4 ¾ cups flour.
-console.log(toVulgar(.1274859937)) // '.1274859937'
-console.log(toDecimal('Hello World!')) // 'Hello World!
